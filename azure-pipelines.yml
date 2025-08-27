@@ -1,4 +1,9 @@
-trigger: none
+trigger:
+  branches:
+    include:
+      - feature/*
+      - main
+      
 pool: Prabhas-Agent-Pools
 
 variables:
@@ -23,6 +28,16 @@ steps:
     backendAzureRmKey: 'prod.terraform.tfstate'
 
 - task: TerraformTask@5
+  displayName: Terraform Fmt
+  inputs:
+    provider: 'azurerm'
+    command: 'custom'
+    workingDirectory: '$(directory_config)'
+    outputTo: 'console'
+    customCommand: 'fmt'
+    environmentServiceNameAzureRM: 'PrabhaSC-WIF'
+
+- task: TerraformTask@5
   displayName: Terrafomr Validate
   inputs:
     provider: 'azurerm'
@@ -37,8 +52,10 @@ steps:
     workingDirectory: $(directory_config)
     environmentServiceNameAzureRM: $(service_conn)
 
+# Apply will run only if branch is 'main' after reviewer approve
 - task: TerraformTask@5
   displayName: Terraoform Apply
+  condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/main'))
   inputs:
     provider: 'azurerm'
     command: 'apply'
