@@ -14,3 +14,9 @@ module "storage_account" {
   account_tier = "Standard"
   account_replication_type = "GRS"
 }
+module "resource_group" {
+ source = "../modules/azurerm_resource_group"
+
+  resource_group_name   = "rg-prabha10"
+  location              = "West Us"
+}
