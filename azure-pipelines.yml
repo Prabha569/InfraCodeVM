@@ -52,11 +52,6 @@ steps:
     workingDirectory: $(directory_config)
     environmentServiceNameAzureRM: $(service_conn)
 
-- task: ManualValidation@1
-  inputs:
-    notifyUsers: 'prabhakarnayak993@gmail.com'
-    approvers: 'nayakprabhakar073@gmail.com'
-    instructions: 'check kar do'
 
 # Apply will run only if branch is 'main' after reviewer approve
 - task: TerraformTask@5
