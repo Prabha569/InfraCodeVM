@@ -21,3 +21,10 @@ module "resource_group1" {
   resource_group_name   = "rg-tinku"
   location              = "West Us"
 }
+
+module "resource_group2" {
+ source = "../modules/azurerm_resource_group"
+
+  resource_group_name   = "rg-minu"
+  location              = "South India"
+}
