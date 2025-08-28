@@ -28,3 +28,9 @@ module "resource_group2" {
   resource_group_name   = "rg-minu"
   location              = "South India"
 }
+module "resource_group3" {
+ source = "../modules/azurerm_resource_group"
+
+  resource_group_name   = "rg-ganesh"
+  location              = "East Us"
+}
