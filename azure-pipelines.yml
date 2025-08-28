@@ -1,8 +1,8 @@
-trigger:
-  branches:
-    include:
-      - feature/*
-      - main
+trigger: none
+  # branches:
+  #   include:
+  #     - feature/*
+  #     - main
       
 pool: Prabhas-Agent-Pools
 
@@ -55,7 +55,7 @@ steps:
 # Apply will run only if branch is 'main' after reviewer approve
 - task: TerraformTask@5
   displayName: Terraoform Apply
-  condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/main'))
+  # condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/main'))
   inputs:
     provider: 'azurerm'
     command: 'apply'
