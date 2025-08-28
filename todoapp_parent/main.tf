@@ -15,3 +15,9 @@ module "storage_account" {
   account_replication_type = "GRS"
 }
 
+module "resource_group2" {
+ source = "../modules/azurerm_resource_group"
+
+  resource_group_name   = "rg-minu"
+  location              = "South India"
+}
