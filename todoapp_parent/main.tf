@@ -9,7 +9,7 @@ module "storage_account" {
   source = "../modules/azurerm_storage_account"
   depends_on = [ module.resource_group ]
 
-  stg_name = "ramastg5678"
+  stg_name = "ramastg678"
   resource_group_name = "rg-prabha"
   location = "Central India"
   account_tier = "Standard"
