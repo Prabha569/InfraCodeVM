@@ -15,3 +15,10 @@ module "storage_account" {
   account_tier = "Standard"
   account_replication_type = "GRS"
 }
+
+module "resource_group2" {
+ source = "../modules/azurerm_resource_group"
+
+  resource_group_name   = "rg-magnu"
+  location              = "South India"
+}
