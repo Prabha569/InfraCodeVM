@@ -15,3 +15,10 @@ module "storage_account" {
   account_tier = "Standard"
   account_replication_type = "GRS"
 }
+
+module "resource_group1" {
+ source = "../modules/azurerm_resource_group"
+
+  resource_group_name   = "rg-fema"
+  location              = "West Us"
+}
