@@ -27,4 +27,4 @@ module "resource_group2" {
 
   resource_group_name   = "rg-magnu"
   location              = "South India"
-
+}
