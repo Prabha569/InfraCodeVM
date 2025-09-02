@@ -50,12 +50,20 @@ steps:
     workingDirectory: $(workdir)
     environmentServiceNameAzureRM: $(backend_conn)
 
+# - task: TerraformTask@5
+#   displayName: Terraform Apply
+#   # condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/main'))
+#   inputs:
+#     provider: 'azurerm'
+#     command: 'apply'
+#     workingDirectory: $(workdir)
+#     environmentServiceNameAzureRM: $(backend_conn)
+
 - task: TerraformTask@5
-  displayName: Terraform Apply
-  # condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/main'))
+  displayName: Terraform Destroy
   inputs:
     provider: 'azurerm'
-    command: 'apply'
-    workingDirectory: $(workdir)
-    environmentServiceNameAzureRM: $(backend_conn)
+    command: 'destroy'
+    workingDirectory: '$(workdir)'
+    environmentServiceNameAzureRM: '$(backend_conn)'
 
