@@ -1,0 +1,60 @@
+trigger:
+ branches:
+   include:
+     - feature/*
+     - main
+
+pool: Prabhas-Agent-Pools  
+
+variables:
+  workdir: '$(System.DefaultWorkingDirectory)/todoapp_parent'
+  backend_conn: 'PrabhaSC-WIF2'
+
+
+steps:
+- task: TerraformInstaller@1
+  displayName: Terraform Install
+  inputs:
+    terraformVersion: 'latest'
+
+- task: TerraformTask@5
+  displayName: Terraform Init
+  inputs:
+    provider: 'azurerm'
+    command: 'init'
+    workingDirectory: $(workdir)
+    backendServiceArm: $(backend_conn)
+    backendAzureRmStorageAccountName: 'krishnastg567'
+    backendAzureRmContainerName: 'tfstate'
+    backendAzureRmKey: 'test.terraform.tfstate'
+
+- task: TerraformTask@5
+  displayName: Terraform FMT
+  inputs:
+    provider: 'azurerm'
+    command: 'validate'
+    workingDirectory: $(workdir)
+
+- task: TerraformTask@5
+  displayName: Terrafomr Validate
+  inputs:
+    provider: 'azurerm'
+    command: 'validate'
+    workingDirectory: $(workdir)
+
+- task: TerraformTask@5
+  displayName: Terraform Plan
+  inputs:
+    provider: 'azurerm'
+    command: 'plan'
+    workingDirectory: $(workdir)
+    environmentServiceNameAzureRM: $(backend_conn)
+
+- task: TerraformTask@5
+  displayName: Terraform Apply
+  inputs:
+    provider: 'azurerm'
+    command: 'apply'
+    workingDirectory: $(workdir)
+    environmentServiceNameAzureRM: $(backend_conn)
+
